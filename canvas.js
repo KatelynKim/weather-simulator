@@ -6,15 +6,15 @@ let ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const weatherData = await fetchWeather();   
-const particleArray = createParticleArray(weatherData, ctx)
- 
+const weatherData = await fetchWeather();
+const particleArray = createParticleArray(weatherData, ctx);
+
 function animate() {
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, innerWidth, innerHeight);
   for (const element of particleArray) {
     element.update();
-  } 
+  }
 }
 
 animate();

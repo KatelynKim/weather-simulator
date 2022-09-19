@@ -1,12 +1,13 @@
 import Rain from "../particles/Rain.js";
+import Snow from "../particles/snow.js";
 
 export const createParticleArray = (weatherData, ctx) => {
   const { rain, snow, wind } = weatherData;
   let particleArray = [];
   let numberOfParticles;
+  let defaultNumberOfParticles = 300
   if (rain) {
-    numberOfParticles = rain["1h"];
-    console.log("it rained in ur city");
+    numberOfParticles = rain["1h"] || defaultNumberOfParticles;
     for (let i = 0; i < numberOfParticles * 50; i++) {
       let x = Math.random() * innerWidth;
       let y = Math.random() * innerHeight;
@@ -16,11 +17,11 @@ export const createParticleArray = (weatherData, ctx) => {
       particleArray.push(new Rain(x, y, dx, dy, opacity, ctx));
     }
   } else if (snow) {
-    console.log("it snowed in ur city");
-    for (let i = 0; i < 300; i++) {
+    numberOfParticles = snow["1h"] || defaultNumberOfParticles;
+    for (let i = 0; i < numberOfParticles; i++) {
       let x = Math.random() * innerWidth;
       let y = Math.random() * innerHeight;
-      let dx = wind.speed * 0.5;
+      let dx = wind.speed * 0.1;
       let dy = Math.random() * (0.3, 0.2) + 0.2;
       let radius = Math.random() * 20;
       let opacity = Math.random();
